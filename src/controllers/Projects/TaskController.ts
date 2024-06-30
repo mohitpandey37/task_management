@@ -1,9 +1,6 @@
 import _RS from "../../helpers/ResponseHelper";
-import Auth from "../../helpers/Auth";
-import User from "../../models/User";
-import { start } from "repl";
-import Project from "../../models/Project";
 import Task from "../../models/Task";
+import socketObj from "../../services/SocketService";
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const startTime = new Date().getTime();
@@ -11,6 +8,7 @@ const app = express();
 
 app.use(cookieParser());
 export class TaskController {
+    
   /**
    * @api {post} /api/tasks        Create
    *  @apiBody {String} title      Title of the task.
@@ -173,6 +171,8 @@ export class TaskController {
         return _RS.badRequest(res, "NOTFOUND", "not found", doc, startTime);
       doc.status = status || doc.status;
       doc.save();
+      let socketDoc = socketObj.sockets;
+      socketDoc.emit('notify', {message: `${doc.title} status is updated to ${doc.status}.`})
       return _RS.ok(res, "SUCCESS", "Updated Successfully", doc, startTime);
     } catch (error) {
       next(error);

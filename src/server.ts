@@ -71,6 +71,10 @@ export class Server {
 
     this.app.use("/api", Routes);
 
+    this.app.get('/homepage', function(req, res){
+      res.sendFile(__dirname + "/" + 'public/index.html')
+    })
+
   }
 
   error404Handler() {

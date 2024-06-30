@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket Demo</title>
+  </head>
+  <body><script src="/socket.io/socket.io.js"></script>
+    <h1>Task Update notification</h1>
+    <div id="loading">Loading data...</div>
+    <div id="data-container">
+      <h3 id="message"></h3>
+    </div>
+    <script>
+      var socket = io();
+      socket.on('notify', data => {
+        document.getElementById('loading').style.display = 'none';
+        console.log('data--->', data)
+    
+        const dataContainer = document.getElementById('data-container');
+        dataContainer.style.display = 'block';
+
+        document.getElementById('message').textContent = data.message;
+    })
+    </script>
+  </body>
+</html>

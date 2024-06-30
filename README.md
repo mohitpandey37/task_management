@@ -1,5 +1,3 @@
-# Task Managemnt
-
 # System Configuration 
 NODE VERSION = 18.17.0
 
@@ -11,7 +9,7 @@ NODE VERSION = 18.17.0
 5. To access the api docs : http://localhost:3000/api-doc/
 
 # Project Details
-All project requirements are complete (User's CRUD operation, Task's CRUD operation, Project's CRUD operation).
-Tasks are mapped with projects as considered they are related to a particular project. 
-Soft delete functionality is used here as it will only inactive any data not fully remove.
-Document add, edit end delete access is only limited to the admin. Task status update api is accesible by user. 
+1. All project requirements are completed (User's CRUD operation, Task's CRUD operation, Project's CRUD operation).
+2. Tasks are mapped with projects as considered they are related to a particular project. 
+3. Soft delete functionality is used here as it will only inactive any data not fully remove.
+4. Document add, edit end delete access is only limited to the admin. Task status update api is accesible by user. 

@@ -1,1 +1,17 @@
-# warehouse
+# Task Managemnt
+
+# System Configuration 
+NODE VERSION = 18.17.0
+
+# Project set up
+1. Clone the project from giturl : https://github.com/mohitpandey37/task_management 
+2. Install required dependecies with commnad : "npm install"
+3. start project with command: "npm run dev"
+4. run an additional command only once in a new terminal: "npm run doc"
+5. To access the api docs : http://localhost:3000/api-doc/
+
+# Project Details
+All project requirements are complete (User's CRUD operation, Task's CRUD operation, Project's CRUD operation).
+Tasks are mapped with projects as considered they are related to a particular project. 
+Soft delete functionality is used here as it will only inactive any data not fully remove.
+Document add, edit end delete access is only limited to the admin. Task status update api is accesible by user. 

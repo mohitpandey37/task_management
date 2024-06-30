@@ -18,7 +18,7 @@ export class TaskController {
    * @apiBody {String} due_date    Task's Due date in date string (i.e. "2024-06-28T16:35:17.579Z").
    * @apiBody {String} priority    Task's priority (i.e "first" or "second")
    * @apiBody {String} project     Project ID to which task is associated
-   * @apiBody {String} priority    User ID to which task is assigned
+   * @apiBody {String} user    User ID to which task is assigned
    * @apiHeader {String} authorization User's authorized token (i.e "Bearer abcxyz..")
    * @apiName Create Task
    * @apiGroup Tasks
@@ -104,7 +104,7 @@ export class TaskController {
    * @apiBody {String} due_date    Task's Due date in date string (i.e. "2024-06-28T16:35:17.579Z").
    * @apiBody {String} priority    Task's priority (i.e "first" or "second")
    * @apiBody {String} project     Project ID to which task is associated
-   * @apiBody {String} priority    User ID to which task is assigned
+   * @apiBody {String} user    User ID to which task is assigned
    * @apiHeader {String} authorization User's authorized token (i.e "Bearer abcxyz..")
    * @apiName Update Task
    * @apiGroup Tasks
@@ -149,6 +149,33 @@ export class TaskController {
       return _RS.ok(res, "SUCCESS", "Removed Successfully", {}, startTime);
     } catch (err) {
       next(err);
+    }
+  }
+
+  /**
+   * @api {put} /api/tasks/status-update/:id        Update task Status by ID
+   * @apiParam {string} id Task ID.
+   * @apiBody {String} status      Task's status(i.e. pending, in-progress, completed).
+   * @apiHeader {String} authorization User's authorized token (i.e "Bearer abcxyz..")
+   * @apiName Update Task Status
+   * @apiGroup Tasks
+   * @apiVersion 1.0.0
+   */
+  static async statusupdate(req, res, next) {
+    try {
+      let { status } = req.body;
+
+      if (!status)
+        return _RS.badRequest(res, "", "Status can't be empty", {}, startTime);
+
+      let doc = await Task.findOne({ _id: req.params.id });
+      if (!doc)
+        return _RS.badRequest(res, "NOTFOUND", "not found", doc, startTime);
+      doc.status = status || doc.status;
+      doc.save();
+      return _RS.ok(res, "SUCCESS", "Updated Successfully", doc, startTime);
+    } catch (error) {
+      next(error);
     }
   }
 }

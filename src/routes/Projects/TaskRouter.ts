@@ -37,7 +37,8 @@ class TaskRouter {
     )
   }
   public put(){
-    this.router.put('/:id', Authentication.admin, TaskController.updateTask)
+    this.router.put('/:id', Authentication.admin, TaskController.updateTask);
+    this.router.put('/status-update/:id', Authentication.user, TaskController.statusupdate);
   }
 
   public delete(){
